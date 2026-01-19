@@ -30,11 +30,11 @@ def handle_incoming_call():
 
     gather = Gather(
         input='dtmf',
-        num_digits=6,
+        num_digits=8,
         action='/verify-pin',
         timeout=30
     )
-    gather.say("Please enter your six digit pin", voice='Polly.Matthew')
+    gather.say("Please enter your eight digit pin", voice='Polly.Matthew')
     resp.append(gather)
 
     resp.say("No pin entered. Goodbye.", voice='Polly.Matthew')
