@@ -1,14 +1,23 @@
 import imaplib
 import email
+from datetime import datetime, timedelta
 
 
-def get_recent_emails(username, password, hours=24):
+def get_recent_emails(username, password, hours=24, unread_only=False):
     try:
         mail = imaplib.IMAP4_SSL("imap.mail.me.com")
         mail.login(username, password)
         mail.select("inbox")
 
-        _, messages = mail.search(None, 'ALL')
+        # Build search criteria
+        if unread_only:
+            search_criteria = 'UNSEEN'
+        else:
+            date = (datetime.now() - timedelta(hours=hours)
+                    ).strftime("%d-%b-%Y")
+            search_criteria = f'(SINCE {date})'
+
+        _, messages = mail.search(None, search_criteria)
 
         if not messages[0]:
             return []
@@ -16,6 +25,7 @@ def get_recent_emails(username, password, hours=24):
         email_ids = messages[0].split()
         recent_emails = []
 
+        # Get last 10 emails
         for email_id in email_ids[-10:]:
             try:
                 _, msg_data = mail.fetch(email_id, '(BODY.PEEK[])')
@@ -34,7 +44,6 @@ def get_recent_emails(username, password, hours=24):
                         break
 
             except Exception as e:
-                print(f"Error: {e}")
                 continue
 
         mail.close()
