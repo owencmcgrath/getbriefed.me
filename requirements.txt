@@ -39,7 +39,6 @@ protobuf==6.33.4
 pycparser==2.23
 pydantic==2.12.5
 pydantic_core==2.41.5
-pyobjc-framework-Cocoa==12.1
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.1
 pytz==2025.2
