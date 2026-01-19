@@ -18,5 +18,4 @@ if __name__ == "__main__":
     briefing = generate_briefing(
         events, reminders=[], emails=emails, news=news, stocks=stocks, weather=weather)
 
-    print(briefing)
-    # call_with_briefing(briefing)
+    call_with_briefing(briefing)
