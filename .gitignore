@@ -221,3 +221,5 @@ __marimo__/
 .streamlit/secrets.
 
 test.py
+models.py
+setup_database.py
